@@ -1,24 +1,21 @@
 /**
- *    Copyright 2009-2019 the original author or authors.
+ * Copyright 2009-2019 the original author or authors.
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.apache.ibatis.reflection;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.reflection.factory.ObjectFactory;
 import org.apache.ibatis.reflection.property.PropertyTokenizer;
 import org.apache.ibatis.reflection.wrapper.BeanWrapper;
@@ -32,32 +29,49 @@ import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
  */
 public class MetaObject {
 
+  /**
+   * javabean对象
+   */
   private final Object originalObject;
+  /**
+   * bean的包装对象
+   */
   private final ObjectWrapper objectWrapper;
+  /**
+   * 实例化Javabean的工厂
+   */
   private final ObjectFactory objectFactory;
+  /**
+   * 创建包装对象的工厂
+   */
   private final ObjectWrapperFactory objectWrapperFactory;
+  /**
+   * 用于创建并缓存元数据的工厂
+   */
   private final ReflectorFactory reflectorFactory;
 
-  private MetaObject(Object object, ObjectFactory objectFactory, ObjectWrapperFactory objectWrapperFactory, ReflectorFactory reflectorFactory) {
-    this.originalObject = object;
+  private MetaObject(Object object, ObjectFactory objectFactory,
+      ObjectWrapperFactory objectWrapperFactory, ReflectorFactory reflectorFactory) {
+    originalObject = object;
     this.objectFactory = objectFactory;
     this.objectWrapperFactory = objectWrapperFactory;
     this.reflectorFactory = reflectorFactory;
 
     if (object instanceof ObjectWrapper) {
-      this.objectWrapper = (ObjectWrapper) object;
+      objectWrapper = (ObjectWrapper) object;
     } else if (objectWrapperFactory.hasWrapperFor(object)) {
-      this.objectWrapper = objectWrapperFactory.getWrapperFor(this, object);
+      objectWrapper = objectWrapperFactory.getWrapperFor(this, object);
     } else if (object instanceof Map) {
-      this.objectWrapper = new MapWrapper(this, (Map) object);
+      objectWrapper = new MapWrapper(this, (Map) object);
     } else if (object instanceof Collection) {
-      this.objectWrapper = new CollectionWrapper(this, (Collection) object);
+      objectWrapper = new CollectionWrapper(this, (Collection) object);
     } else {
-      this.objectWrapper = new BeanWrapper(this, object);
+      objectWrapper = new BeanWrapper(this, object);
     }
   }
 
-  public static MetaObject forObject(Object object, ObjectFactory objectFactory, ObjectWrapperFactory objectWrapperFactory, ReflectorFactory reflectorFactory) {
+  public static MetaObject forObject(Object object, ObjectFactory objectFactory,
+      ObjectWrapperFactory objectWrapperFactory, ReflectorFactory reflectorFactory) {
     if (object == null) {
       return SystemMetaObject.NULL_META_OBJECT;
     } else {
@@ -85,11 +99,11 @@ public class MetaObject {
     return objectWrapper.findProperty(propName, useCamelCaseMapping);
   }
 
-  public String[] getGetterNames() {
+  String[] getGetterNames() {
     return objectWrapper.getGetterNames();
   }
 
-  public String[] getSetterNames() {
+  String[] getSetterNames() {
     return objectWrapper.getSetterNames();
   }
 
@@ -146,7 +160,7 @@ public class MetaObject {
     return MetaObject.forObject(value, objectFactory, objectWrapperFactory, reflectorFactory);
   }
 
-  public ObjectWrapper getObjectWrapper() {
+  ObjectWrapper getObjectWrapper() {
     return objectWrapper;
   }
 
