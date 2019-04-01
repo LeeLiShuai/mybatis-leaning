@@ -55,11 +55,11 @@ public class Reflector {
    */
   private final String[] writablePropertyNames;
   /**
-   * set开头的方法
+   * set开头的方法或属性的invoiceker对象
    */
   private final Map<String, Invoker> setMethods = new HashMap<>();
   /**
-   * get开头的方法
+   * get开头的方法或属性的invoiceker对象，有方法则是方法，没有对应的方法才存属性
    */
   private final Map<String, Invoker> getMethods = new HashMap<>();
   /**
@@ -356,9 +356,6 @@ public class Reflector {
     for (Field field : fields) {
       //如果set方法没有包含属性
       if (!setMethods.containsKey(field.getName())) {
-        // issue #379 - removed the check for final because JDK 1.5 allows
-        // modification of final fields through reflection (JSR-133). (JGB)
-        // pr #16 - final static can only be set by the classloader
         int modifiers = field.getModifiers();
         if (!(Modifier.isFinal(modifiers) && Modifier.isStatic(modifiers))) {
           //保存set属性
@@ -413,9 +410,6 @@ public class Reflector {
 
   /**
    * 查找类中的全部方法，包括父类的方法和私有方法
-   *
-   * @param cls The class
-   * @return An array containing all methods in this class
    */
   private Method[] getClassMethods(Class<?> cls) {
     Map<String, Method> uniqueMethods = new HashMap<>();
@@ -522,7 +516,7 @@ public class Reflector {
   }
 
   /**
-   * 根据属性名获取对应的getInvoker
+   * 根据属性名获取对应的Invoker
    */
   Invoker getGetInvoker(String propertyName) {
     Invoker method = getMethods.get(propertyName);
