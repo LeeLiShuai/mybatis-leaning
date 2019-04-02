@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.apache.ibatis.io</OriginalElement>
+  <nodes>
+    <node x="383.0" y="0.0">org.apache.ibatis.io.DefaultVFS</node>
+    <node x="99.25" y="718.0">org.apache.ibatis.io.ResolverUtil</node>
+    <node x="0.0" y="13.0">org.apache.ibatis.io.JBoss6VFS</node>
+    <node x="842.0" y="0.0">org.apache.ibatis.io.ClassLoaderWrapper</node>
+    <node x="844.0" y="425.0">org.apache.ibatis.io.Resources</node>
+    <node x="152.75" y="320.0">org.apache.ibatis.io.VFS</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.apache.ibatis.io.DefaultVFS" target="org.apache.ibatis.io.VFS">
+      <point x="0.0" y="135.0" />
+      <point x="590.0" y="290.0" />
+      <point x="489.5" y="290.0" />
+      <point x="112.25" y="-174.0" />
+    </edge>
+    <edge source="org.apache.ibatis.io.ResolverUtil" target="org.apache.ibatis.io.VFS">
+      <point x="0.0" y="-161.0" />
+      <point x="0.0" y="174.0" />
+    </edge>
+    <edge source="org.apache.ibatis.io.VFS" target="org.apache.ibatis.io.DefaultVFS">
+      <point x="37.41666666666663" y="-174.0" />
+      <point x="414.66666666666663" y="300.0" />
+      <point x="452.0" y="300.0" />
+      <point x="-138.0" y="135.0" />
+    </edge>
+    <edge source="org.apache.ibatis.io.Resources" target="org.apache.ibatis.io.ClassLoaderWrapper">
+      <point x="-114.5" y="-291.5" />
+      <point x="-115.5" y="187.5" />
+    </edge>
+    <edge source="org.apache.ibatis.io.VFS" target="org.apache.ibatis.io.JBoss6VFS">
+      <point x="-187.08333333333331" y="-174.0" />
+      <point x="190.16666666666669" y="300.0" />
+      <point x="60.5" y="300.0" />
+      <point x="-121.0" y="122.0" />
+    </edge>
+    <edge source="org.apache.ibatis.io.JBoss6VFS" target="org.apache.ibatis.io.VFS">
+      <point x="121.0" y="122.0" />
+      <point x="302.5" y="300.0" />
+      <point x="339.8333333333333" y="300.0" />
+      <point x="-37.416666666666686" y="-174.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9564131668558457" x="969.4742463802515" y="417.5723949679563" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

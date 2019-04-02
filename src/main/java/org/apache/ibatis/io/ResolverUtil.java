@@ -40,7 +40,7 @@ public class ResolverUtil<T> {
   }
 
   /**
-   * 判断一个类是否集成某个类或实现某个方法
+   * 判断一个类是否继承某个类或实现某个方法
    */
   public static class IsA implements Test {
 
