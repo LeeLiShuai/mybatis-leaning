@@ -25,6 +25,8 @@ import org.apache.ibatis.reflection.wrapper.ObjectWrapper;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
 
 /**
+ * 元对象
+ *
  * @author Clinton Begin
  */
 public class MetaObject {
@@ -50,31 +52,42 @@ public class MetaObject {
    */
   private final ReflectorFactory reflectorFactory;
 
+  /**
+   * 私有构造函数
+   */
   private MetaObject(Object object, ObjectFactory objectFactory,
       ObjectWrapperFactory objectWrapperFactory, ReflectorFactory reflectorFactory) {
     originalObject = object;
     this.objectFactory = objectFactory;
     this.objectWrapperFactory = objectWrapperFactory;
     this.reflectorFactory = reflectorFactory;
-
+    //如果对象是ObjectWrapper类型，直接赋值
     if (object instanceof ObjectWrapper) {
       objectWrapper = (ObjectWrapper) object;
+      //如果可以使用工厂创建，就使用工厂创建
     } else if (objectWrapperFactory.hasWrapperFor(object)) {
       objectWrapper = objectWrapperFactory.getWrapperFor(this, object);
     } else if (object instanceof Map) {
+      //如果是map类型，初始化为MapWrapper
       objectWrapper = new MapWrapper(this, (Map) object);
     } else if (object instanceof Collection) {
+      //是其他集合类型，初始化为CollectionWrapper
       objectWrapper = new CollectionWrapper(this, (Collection) object);
     } else {
+      //初始化为beanWrapper
       objectWrapper = new BeanWrapper(this, object);
     }
   }
 
+  /**
+   * 对外暴露的创建MetaObject方法
+   */
   public static MetaObject forObject(Object object, ObjectFactory objectFactory,
       ObjectWrapperFactory objectWrapperFactory, ReflectorFactory reflectorFactory) {
     if (object == null) {
       return SystemMetaObject.NULL_META_OBJECT;
     } else {
+      //调用构造函数
       return new MetaObject(object, objectFactory, objectWrapperFactory, reflectorFactory);
     }
   }
@@ -95,6 +108,9 @@ public class MetaObject {
     return originalObject;
   }
 
+  /**
+   * 根据属性名称查找对应属性，调用objectWrapper的方法
+   */
   public String findProperty(String propName, boolean useCamelCaseMapping) {
     return objectWrapper.findProperty(propName, useCamelCaseMapping);
   }
@@ -123,6 +139,9 @@ public class MetaObject {
     return objectWrapper.hasGetter(name);
   }
 
+  /**
+   * 获取属性名称获取对应属性的值
+   */
   public Object getValue(String name) {
     PropertyTokenizer prop = new PropertyTokenizer(name);
     if (prop.hasNext()) {

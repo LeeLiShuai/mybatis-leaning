@@ -1,21 +1,20 @@
 /**
- *    Copyright 2009-2019 the original author or authors.
+ * Copyright 2009-2019 the original author or authors.
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.apache.ibatis.reflection;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
@@ -26,7 +25,6 @@ import java.lang.reflect.WildcardType;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.reflection.typeparam.Calculator;
 import org.apache.ibatis.reflection.typeparam.Calculator.SubCalculator;
 import org.apache.ibatis.reflection.typeparam.Level0Mapper;
@@ -35,7 +33,11 @@ import org.apache.ibatis.reflection.typeparam.Level1Mapper;
 import org.apache.ibatis.reflection.typeparam.Level2Mapper;
 import org.junit.jupiter.api.Test;
 
+/**
+ * 类型转换测试
+ */
 class TypeParameterResolverTest {
+
   @Test
   void testReturn_Lv0SimpleClass() throws Exception {
     Class<?> clazz = Level0Mapper.class;
@@ -171,7 +173,8 @@ class TypeParameterResolverTest {
     ParameterizedType paramTypeOuter = (ParameterizedType) result;
     assertEquals(List.class, paramTypeOuter.getRawType());
     assertEquals(1, paramTypeOuter.getActualTypeArguments().length);
-    ParameterizedType paramTypeInner = (ParameterizedType) paramTypeOuter.getActualTypeArguments()[0];
+    ParameterizedType paramTypeInner = (ParameterizedType) paramTypeOuter
+        .getActualTypeArguments()[0];
     assertEquals(Calculator.class, paramTypeInner.getRawType());
     assertEquals(Date.class, paramTypeInner.getActualTypeArguments()[0]);
   }
@@ -379,25 +382,26 @@ class TypeParameterResolverTest {
   @Test
   void testReturnParam_WildcardWithUpperBounds() throws Exception {
     class Key {
+
     }
-    @SuppressWarnings("unused")
     class KeyBean<S extends Key & Cloneable, T extends Key> {
+
       private S key1;
       private T key2;
 
-      public S getKey1() {
+      private S getKey1() {
         return key1;
       }
 
-      public void setKey1(S key1) {
+      private void setKey1(S key1) {
         this.key1 = key1;
       }
 
-      public T getKey2() {
+      private T getKey2() {
         return key2;
       }
 
-      public void setKey2(T key2) {
+      private void setKey2(T key2) {
         this.key2 = key2;
       }
     }
@@ -414,15 +418,27 @@ class TypeParameterResolverTest {
 
   @Test
   void testDeepHierarchy() throws Exception {
-    @SuppressWarnings("unused")
     abstract class A<S> {
+
       protected S id;
-      public S getId() { return this.id;}
-      public void setId(S id) {this.id = id;}
+
+      public S getId() {
+        return id;
+      }
+
+      public void setId(S id) {
+        this.id = id;
+      }
     }
-    abstract class B<T> extends A<T> {}
-    abstract class C<U> extends B<U> {}
-    class D extends C<Integer> {}
+    abstract class B<T> extends A<T> {
+
+    }
+    abstract class C<U> extends B<U> {
+
+    }
+    class D extends C<Integer> {
+
+    }
     Class<?> clazz = D.class;
     Method method = clazz.getMethod("getId");
     assertEquals(Integer.class, TypeParameterResolver.resolveReturnType(method, clazz));
