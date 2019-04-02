@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.apache.ibatis.reflection.factory.DefaultObjectFactory</OriginalElement>
+  <nodes>
+    <node x="510.346064814815" y="84.0">org.apache.ibatis.reflection.factory.ObjectFactory</node>
+    <node x="1604.0" y="1462.5">org.apache.ibatis.reflection.ReflectorFactory</node>
+    <node x="467.6127314814818" y="2435.0">org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory</node>
+    <node x="1852.9960648148153" y="273.0">org.apache.ibatis.reflection.Reflector</node>
+    <node x="1828.25" y="110.0">org.apache.ibatis.reflection.invoker.Invoker</node>
+    <node x="0.0" y="625.0">org.apache.ibatis.reflection.wrapper.ObjectWrapper</node>
+    <node x="643.0" y="1475.5">org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory</node>
+    <node x="1624.1543981481486" y="1763.0">org.apache.ibatis.reflection.MetaClass</node>
+    <node x="1093.0" y="1410.0">org.apache.ibatis.reflection.factory.DefaultObjectFactory</node>
+    <node x="2211.816898148148" y="1945.0">org.apache.ibatis.reflection.DefaultReflectorFactory</node>
+    <node x="314.47939814814845" y="1698.0">org.apache.ibatis.reflection.MetaObject</node>
+  </nodes>
+  <notes>
+    <note x="544.346064814815" y="0.0">
+      <node>org.apache.ibatis.reflection.factory.ObjectFactory</node>
+      <value>用于创建对象，通过反射调用Class的构造函数创建</value>
+      <edge>
+        <point x="0.0" y="-69.5" />
+        <point x="0.0" y="17.0" />
+      </edge>
+    </note>
+    <note x="1586.0" y="794.5">
+      <node>org.apache.ibatis.reflection.ReflectorFactory</node>
+      <value>创建并缓存Reflector的工厂</value>
+      <edge>
+        <point x="-82.5" y="-56.5" />
+        <point x="0.0" y="17.0" />
+      </edge>
+    </note>
+    <note x="2139.25" y="136.5">
+      <node>org.apache.ibatis.reflection.Reflector</node>
+      <value>记录Class的元数据；属性，方法，类的信息</value>
+      <edge>
+        <point x="186.66666666666663" y="-538.5" />
+        <point x="2319.6627314814823" y="253.0" />
+        <point x="2288.75" y="253.0" />
+        <point x="0.0" y="17.0" />
+      </edge>
+    </note>
+    <note x="1883.75" y="0.0">
+      <node>org.apache.ibatis.reflection.invoker.Invoker</node>
+      <value>用于获取和设置属性的值</value>
+      <edge>
+        <point x="0.0" y="-43.5" />
+        <point x="0.0" y="17.0" />
+      </edge>
+    </note>
+    <note x="97.75" y="136.5">
+      <node>org.apache.ibatis.reflection.wrapper.ObjectWrapper</node>
+      <value>对象的包装类</value>
+      <edge>
+        <point x="-152.75" y="-186.5" />
+        <point x="0.0" y="17.0" />
+      </edge>
+    </note>
+    <note x="882.5" y="794.5">
+      <node>org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory</node>
+      <value>创建对象包装类的工厂</value>
+      <edge>
+        <point x="107.5" y="-43.5" />
+        <point x="0.0" y="17.0" />
+      </edge>
+    </note>
+    <note x="2002.9166666666665" y="1469.0">
+      <node>org.apache.ibatis.reflection.MetaClass</node>
+      <value>包含一个Reflector对象和一个ReflectorFactory对象，\n调用其中一些方法是会想factory中缓存reflector对象内部\n的对象，例如：Order.item[0].name，初始化时只有Order\n，调用方法时可能会缓存item</value>
+      <edge>
+        <point x="173.20000000000005" y="-278.5" />
+        <point x="2013.8543981481484" y="1678.0" />
+        <point x="2197.9166666666665" y="1678.0" />
+        <point x="0.0" y="50.0" />
+      </edge>
+    </note>
+    <note x="1214.0833333333333" y="794.5">
+      <node>org.apache.ibatis.reflection.factory.DefaultObjectFactory</node>
+      <value>默认的创建对象的工厂</value>
+      <edge>
+        <point x="0.0" y="-109.0" />
+        <point x="1329.0" y="1390.0" />
+        <point x="1297.0833333333333" y="1390.0" />
+        <point x="0.0" y="17.0" />
+      </edge>
+    </note>
+  </notes>
+  <edges>
+    <edge source="org.apache.ibatis.reflection.MetaObject" target="org.apache.ibatis.reflection.factory.ObjectFactory">
+      <point x="-32.69999999999982" y="-343.5" />
+      <point x="608.7793981481486" y="1678.0" />
+      <point x="632.5" y="1678.0" />
+      <point x="632.5" y="253.0" />
+      <point x="765.971064814815" y="253.0" />
+      <point x="51.125" y="69.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory" target="org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory">
+      <point x="143.33333333333348" y="-43.5" />
+      <point x="825.9460648148153" y="2410.0" />
+      <point x="1036.6627314814818" y="2410.0" />
+      <point x="1036.6627314814818" y="1658.0" />
+      <point x="1019.25" y="1658.0" />
+      <point x="161.25" y="43.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.MetaObject" target="org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory">
+      <point x="32.700000000000045" y="-343.5" />
+      <point x="674.1793981481485" y="1678.0" />
+      <point x="696.75" y="1678.0" />
+      <point x="-161.25" y="43.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.MetaClass" target="org.apache.ibatis.reflection.Reflector">
+      <point x="86.60000000000002" y="-278.5" />
+      <point x="1927.2543981481485" y="1678.0" />
+      <point x="1992.4166666666667" y="1678.0" />
+      <point x="1992.4166666666667" y="1390.0" />
+      <point x="2086.3293981481484" y="1390.0" />
+      <point x="-46.66666666666674" y="538.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.MetaClass" target="org.apache.ibatis.reflection.ReflectorFactory">
+      <point x="0.0" y="-278.5" />
+      <point x="1840.6543981481486" y="1678.0" />
+      <point x="1835.0" y="1678.0" />
+      <point x="66.0" y="56.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.MetaObject" target="org.apache.ibatis.reflection.wrapper.ObjectWrapper">
+      <point x="-228.89999999999986" y="-343.5" />
+      <point x="412.5793981481486" y="1668.0" />
+      <point x="265.0627314814815" y="1668.0" />
+      <point x="265.0627314814815" y="1390.0" />
+      <point x="305.5" y="1390.0" />
+      <point x="0.0" y="186.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.wrapper.ObjectWrapper" target="org.apache.ibatis.reflection.MetaObject">
+      <point x="122.19999999999982" y="186.5" />
+      <point x="427.6999999999998" y="1390.0" />
+      <point x="372.0999999999999" y="1390.0" />
+      <point x="372.0999999999999" y="1658.0" />
+      <point x="477.97939814814845" y="1658.0" />
+      <point x="-163.5" y="-343.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.DefaultReflectorFactory" target="org.apache.ibatis.reflection.Reflector">
+      <point x="160.125" y="-96.5" />
+      <point x="2585.441898148148" y="1678.0" />
+      <point x="2489.691898148148" y="1678.0" />
+      <point x="2489.691898148148" y="1370.0" />
+      <point x="2366.3293981481484" y="1370.0" />
+      <point x="233.33333333333326" y="538.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.wrapper.ObjectWrapper" target="org.apache.ibatis.reflection.factory.ObjectFactory">
+      <point x="152.75" y="-186.5" />
+      <point x="458.25" y="253.0" />
+      <point x="561.471064814815" y="253.0" />
+      <point x="-153.375" y="69.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.factory.DefaultObjectFactory" target="org.apache.ibatis.reflection.factory.ObjectFactory">
+      <point x="-157.33333333333348" y="-109.0" />
+      <point x="1171.6666666666665" y="1390.0" />
+      <point x="1163.1460648148147" y="1390.0" />
+      <point x="1163.1460648148147" y="253.0" />
+      <point x="868.221064814815" y="253.0" />
+      <point x="153.375" y="69.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.ReflectorFactory" target="org.apache.ibatis.reflection.Reflector">
+      <point x="82.5" y="-56.5" />
+      <point x="1851.5" y="1380.0" />
+      <point x="1992.9960648148153" y="1380.0" />
+      <point x="-140.0" y="538.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory" target="org.apache.ibatis.reflection.MetaObject">
+      <point x="53.75" y="43.5" />
+      <point x="911.75" y="1658.0" />
+      <point x="804.9793981481484" y="1658.0" />
+      <point x="163.5" y="-343.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory" target="org.apache.ibatis.reflection.wrapper.ObjectWrapper">
+      <point x="-143.33333333333348" y="-43.5" />
+      <point x="539.2793981481483" y="2410.0" />
+      <point x="226.96273148148134" y="2410.0" />
+      <point x="226.96273148148134" y="1390.0" />
+      <point x="61.09999999999991" y="1390.0" />
+      <point x="-244.4000000000001" y="186.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory" target="org.apache.ibatis.reflection.wrapper.ObjectWrapper">
+      <point x="-107.5" y="-43.5" />
+      <point x="750.5" y="1390.0" />
+      <point x="549.9000000000001" y="1390.0" />
+      <point x="244.4000000000001" y="186.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.MetaClass" target="org.apache.ibatis.reflection.invoker.Invoker">
+      <point x="-173.20000000000005" y="-278.5" />
+      <point x="1667.4543981481484" y="1658.0" />
+      <point x="1575.5" y="1658.0" />
+      <point x="1575.5" y="253.0" />
+      <point x="1876.75" y="253.0" />
+      <point x="-97.0" y="43.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.factory.DefaultObjectFactory" target="org.apache.ibatis.reflection.Reflector">
+      <point x="157.33333333333326" y="-109.0" />
+      <point x="1486.3333333333333" y="1370.0" />
+      <point x="1899.662731481482" y="1370.0" />
+      <point x="-233.33333333333331" y="538.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory" target="org.apache.ibatis.reflection.MetaObject">
+      <point x="0.0" y="-43.5" />
+      <point x="682.6127314814818" y="2410.0" />
+      <point x="641.4793981481484" y="2410.0" />
+      <point x="0.0" y="343.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.Reflector" target="org.apache.ibatis.reflection.invoker.Invoker">
+      <point x="-186.66666666666663" y="-538.5" />
+      <point x="1946.3293981481488" y="253.0" />
+      <point x="1973.75" y="253.0" />
+      <point x="0.0" y="43.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.DefaultReflectorFactory" target="org.apache.ibatis.reflection.ReflectorFactory">
+      <point x="-160.125" y="-96.5" />
+      <point x="2265.191898148148" y="1668.0" />
+      <point x="1901.0" y="1668.0" />
+      <point x="132.0" y="56.5" />
+    </edge>
+    <edge source="org.apache.ibatis.reflection.MetaObject" target="org.apache.ibatis.reflection.ReflectorFactory">
+      <point x="294.3000000000002" y="-343.5" />
+      <point x="935.7793981481486" y="1678.0" />
+      <point x="1703.0" y="1678.0" />
+      <point x="-66.0" y="56.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6985581874356339" x="1025.7253427686856" y="429.4972725932475" />
+  <SelectedNodes>
+    <node>org.apache.ibatis.reflection.MetaClass</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

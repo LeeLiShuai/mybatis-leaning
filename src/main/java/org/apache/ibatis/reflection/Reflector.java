@@ -36,7 +36,7 @@ import org.apache.ibatis.reflection.invoker.SetFieldInvoker;
 import org.apache.ibatis.reflection.property.PropertyNamer;
 
 /**
- * 每个实例对应一个类，缓存类的元数据
+ * 每个实例对应一个类，缓存类的元数据,只解析一层，如果属性是另一个对象，不会递归解析
  *
  * @author Clinton Begin
  */
