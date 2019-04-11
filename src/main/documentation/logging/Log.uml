@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.apache.ibatis.logging.Log</OriginalElement>
+  <nodes>
+    <node x="0.0" y="487.0">org.apache.ibatis.logging.log4j2.Log4j2LoggerImpl</node>
+    <node x="1846.343643611291" y="513.5">org.apache.ibatis.logging.stdout.StdOutImpl</node>
+    <node x="3501.0144917582425" y="1537.0">org.apache.ibatis.logging.jdbc.StatementLogger</node>
+    <node x="1080.343643611291" y="474.0">org.apache.ibatis.logging.slf4j.Slf4jLocationAwareLoggerImpl</node>
+    <node x="942.3068223443229" y="1010.0">org.apache.ibatis.logging.slf4j.Slf4jImpl</node>
+    <node x="3210.2957417582425" y="984.0">org.apache.ibatis.logging.jdbc.ResultSetLogger</node>
+    <node x="3529.6371108058615" y="1894.0">org.apache.ibatis.logging.jdbc.ConnectionLogger</node>
+    <node x="1513.8333333333337" y="1407.0">org.apache.ibatis.logging.LogFactory</node>
+    <node x="2450.343643611291" y="500.0">org.apache.ibatis.logging.commons.JakartaCommonsLoggingImpl</node>
+    <node x="749.9731078970053" y="500.0">org.apache.ibatis.logging.slf4j.Slf4jLoggerImpl</node>
+    <node x="3376.7183608058613" y="357.0">org.apache.ibatis.logging.jdbc.BaseJdbcLogger</node>
+    <node x="1550.343643611291" y="500.0">org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl</node>
+    <node x="2809.343643611291" y="513.5">org.apache.ibatis.logging.nologging.NoLoggingImpl</node>
+    <node x="2089.0632635746615" y="0.0">org.apache.ibatis.logging.Log</node>
+    <node x="616.3068223443229" y="1062.5">org.apache.ibatis.logging.LogException</node>
+    <node x="2940.7957417582425" y="1537.0">org.apache.ibatis.logging.jdbc.PreparedStatementLogger</node>
+    <node x="2142.343643611291" y="487.0">org.apache.ibatis.logging.log4j.Log4jImpl</node>
+    <node x="197.4362866300371" y="1010.0">org.apache.ibatis.logging.log4j2.Log4j2Impl</node>
+    <node x="308.0" y="474.0">org.apache.ibatis.logging.log4j2.Log4j2AbstractLoggerImpl</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.apache.ibatis.logging.slf4j.Slf4jLocationAwareLoggerImpl" target="org.apache.ibatis.logging.LogFactory">
+      <point x="150.0" y="161.5" />
+      <point x="1455.343643611291" y="964.0" />
+      <point x="1481.3333333333337" y="964.0" />
+      <point x="1481.3333333333337" y="1337.0" />
+      <point x="1683.48717948718" y="1337.0" />
+      <point x="-30.84615384615381" y="-213.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.LogFactory" target="org.apache.ibatis.logging.log4j.Log4jImpl">
+      <point x="61.69230769230762" y="-213.5" />
+      <point x="1776.0256410256413" y="1347.0" />
+      <point x="2280.343643611291" y="1347.0" />
+      <point x="0.0" y="148.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.StatementLogger" target="org.apache.ibatis.logging.jdbc.ResultSetLogger">
+      <point x="-141.0" y="-83.5" />
+      <point x="3548.0144917582425" y="1387.0" />
+      <point x="3525.2957417582425" y="1387.0" />
+      <point x="105.0" y="161.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.PreparedStatementLogger" target="org.apache.ibatis.logging.jdbc.ResultSetLogger">
+      <point x="186.75" y="-83.5" />
+      <point x="3376.5457417582425" y="1387.0" />
+      <point x="3315.2957417582425" y="1387.0" />
+      <point x="-105.0" y="161.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.log4j2.Log4j2Impl" target="org.apache.ibatis.logging.Log">
+      <point x="0.0" y="-135.5" />
+      <point x="335.4362866300371" y="964.0" />
+      <point x="297.5" y="964.0" />
+      <point x="297.5" y="267.0" />
+      <point x="2121.9204064318037" y="267.0" />
+      <point x="-105.14285714285734" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.slf4j.Slf4jImpl" target="org.apache.ibatis.logging.slf4j.Slf4jLocationAwareLoggerImpl">
+      <point x="55.19999999999999" y="-135.5" />
+      <point x="1135.506822344323" y="964.0" />
+      <point x="1155.343643611291" y="964.0" />
+      <point x="-150.0" y="161.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.ResultSetLogger" target="org.apache.ibatis.logging.jdbc.BaseJdbcLogger">
+      <point x="0.0" y="-161.5" />
+      <point x="3420.2957417582425" y="964.0" />
+      <point x="3490.7808608058613" y="964.0" />
+      <point x="-68.4375" y="278.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.PreparedStatementLogger" target="org.apache.ibatis.logging.jdbc.BaseJdbcLogger">
+      <point x="-62.25" y="-83.5" />
+      <point x="3127.5457417582425" y="1387.0" />
+      <point x="3147.3433608058613" y="1387.0" />
+      <point x="3147.3433608058613" y="944.0" />
+      <point x="3399.5308608058613" y="944.0" />
+      <point x="-159.6875" y="278.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.log4j2.Log4j2AbstractLoggerImpl" target="org.apache.ibatis.logging.log4j2.Log4j2Impl">
+      <point x="0.0" y="161.5" />
+      <point x="496.0" y="964.0" />
+      <point x="445.8362866300372" y="964.0" />
+      <point x="110.40000000000009" y="-135.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.log4j.Log4jImpl" target="org.apache.ibatis.logging.Log">
+      <point x="0.0" y="-148.5" />
+      <point x="2280.343643611291" y="337.0" />
+      <point x="2227.0632635746615" y="337.0" />
+      <point x="0.0" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl" target="org.apache.ibatis.logging.Log">
+      <point x="0.0" y="-135.5" />
+      <point x="1688.343643611291" y="327.0" />
+      <point x="2200.777549288947" y="327.0" />
+      <point x="-26.28571428571422" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.LogFactory" target="org.apache.ibatis.logging.stdout.StdOutImpl">
+      <point x="30.84615384615381" y="-213.5" />
+      <point x="1745.1794871794875" y="1337.0" />
+      <point x="1984.343643611291" y="1337.0" />
+      <point x="0.0" y="122.0" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.LogFactory" target="org.apache.ibatis.logging.commons.JakartaCommonsLoggingImpl">
+      <point x="154.23076923076928" y="-213.5" />
+      <point x="1868.564102564103" y="1377.0" />
+      <point x="2619.843643611291" y="1377.0" />
+      <point x="0.0" y="135.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.log4j2.Log4j2Impl" target="org.apache.ibatis.logging.log4j2.Log4j2AbstractLoggerImpl">
+      <point x="55.19999999999982" y="-135.5" />
+      <point x="390.6362866300369" y="964.0" />
+      <point x="370.6666666666665" y="964.0" />
+      <point x="-125.33333333333348" y="161.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.slf4j.Slf4jLocationAwareLoggerImpl" target="org.apache.ibatis.logging.Log">
+      <point x="0.0" y="-161.5" />
+      <point x="1305.343643611291" y="317.0" />
+      <point x="2187.63469214609" y="317.0" />
+      <point x="-39.42857142857156" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.commons.JakartaCommonsLoggingImpl" target="org.apache.ibatis.logging.Log">
+      <point x="0.0" y="-135.5" />
+      <point x="2619.843643611291" y="307.0" />
+      <point x="2266.491835003233" y="307.0" />
+      <point x="39.42857142857156" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.slf4j.Slf4jImpl" target="org.apache.ibatis.logging.slf4j.Slf4jLoggerImpl">
+      <point x="-110.39999999999998" y="-135.5" />
+      <point x="969.9068223443228" y="964.0" />
+      <point x="887.9731078970053" y="964.0" />
+      <point x="0.0" y="135.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.log4j2.Log4j2LoggerImpl" target="org.apache.ibatis.logging.LogFactory">
+      <point x="-69.0" y="148.5" />
+      <point x="69.0" y="1387.0" />
+      <point x="1529.2564102564106" y="1387.0" />
+      <point x="-185.0769230769231" y="-213.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.ResultSetLogger" target="org.apache.ibatis.logging.Log">
+      <point x="-140.0" y="-161.5" />
+      <point x="3280.2957417582425" y="934.0" />
+      <point x="3293.8746108058613" y="934.0" />
+      <point x="3293.8746108058613" y="277.0" />
+      <point x="2305.9204064318037" y="277.0" />
+      <point x="78.85714285714266" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.LogFactory" target="org.apache.ibatis.logging.LogException">
+      <point x="-92.53846153846143" y="-213.5" />
+      <point x="1621.7948717948723" y="1357.0" />
+      <point x="769.3068223443229" y="1357.0" />
+      <point x="0.0" y="83.0" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.BaseJdbcLogger" target="org.apache.ibatis.logging.Log">
+      <point x="91.25" y="-278.5" />
+      <point x="3650.4683608058613" y="257.0" />
+      <point x="2332.2061207175184" y="257.0" />
+      <point x="105.14285714285688" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.ConnectionLogger" target="org.apache.ibatis.logging.jdbc.PreparedStatementLogger">
+      <point x="-157.5999999999999" y="-83.5" />
+      <point x="3569.0371108058616" y="1874.0" />
+      <point x="3189.7957417582425" y="1874.0" />
+      <point x="0.0" y="83.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.slf4j.Slf4jLocationAwareLoggerImpl" target="org.apache.ibatis.logging.slf4j.Slf4jImpl">
+      <point x="0.0" y="161.5" />
+      <point x="1305.343643611291" y="964.0" />
+      <point x="1190.706822344323" y="964.0" />
+      <point x="110.40000000000009" y="-135.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.log4j2.Log4j2AbstractLoggerImpl" target="org.apache.ibatis.logging.LogFactory">
+      <point x="125.33333333333348" y="161.5" />
+      <point x="621.3333333333335" y="964.0" />
+      <point x="605.8068223443229" y="964.0" />
+      <point x="605.8068223443229" y="1367.0" />
+      <point x="1590.9487179487182" y="1367.0" />
+      <point x="-123.38461538461547" y="-213.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.LogFactory" target="org.apache.ibatis.logging.slf4j.Slf4jImpl">
+      <point x="-61.69230769230762" y="-213.5" />
+      <point x="1652.641025641026" y="1347.0" />
+      <point x="1080.3068223443229" y="1347.0" />
+      <point x="0.0" y="135.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.log4j2.Log4j2LoggerImpl" target="org.apache.ibatis.logging.Log">
+      <point x="0.0" y="-148.5" />
+      <point x="138.0" y="247.0" />
+      <point x="2095.63469214609" y="247.0" />
+      <point x="-131.42857142857156" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.StatementLogger" target="org.apache.ibatis.logging.jdbc.BaseJdbcLogger">
+      <point x="-47.0" y="-83.5" />
+      <point x="3642.0144917582425" y="1387.0" />
+      <point x="3650.9207417582425" y="1387.0" />
+      <point x="3650.9207417582425" y="964.0" />
+      <point x="3582.0308608058613" y="964.0" />
+      <point x="22.8125" y="278.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.stdout.StdOutImpl" target="org.apache.ibatis.logging.Log">
+      <point x="0.0" y="-122.0" />
+      <point x="1984.343643611291" y="337.0" />
+      <point x="2213.9204064318037" y="337.0" />
+      <point x="-13.142857142857338" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.LogFactory" target="org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl">
+      <point x="0.0" y="-213.5" />
+      <point x="1714.3333333333337" y="1327.0" />
+      <point x="1688.343643611291" y="1327.0" />
+      <point x="0.0" y="135.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.LogFactory" target="org.apache.ibatis.logging.Log">
+      <point x="92.53846153846143" y="-213.5" />
+      <point x="1806.8717948717951" y="1357.0" />
+      <point x="2428.843643611291" y="1357.0" />
+      <point x="2428.843643611291" y="327.0" />
+      <point x="2240.2061207175184" y="327.0" />
+      <point x="13.142857142857338" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.nologging.NoLoggingImpl" target="org.apache.ibatis.logging.Log">
+      <point x="0.0" y="-122.0" />
+      <point x="2947.343643611291" y="297.0" />
+      <point x="2279.63469214609" y="297.0" />
+      <point x="52.57142857142844" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.ConnectionLogger" target="org.apache.ibatis.logging.jdbc.BaseJdbcLogger">
+      <point x="0.0" y="-83.5" />
+      <point x="3726.6371108058615" y="1854.0" />
+      <point x="3887.5144917582425" y="1854.0" />
+      <point x="3887.5144917582425" y="944.0" />
+      <point x="3673.2808608058613" y="944.0" />
+      <point x="114.0625" y="278.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.LogFactory" target="org.apache.ibatis.logging.log4j2.Log4j2Impl">
+      <point x="-154.23076923076928" y="-213.5" />
+      <point x="1560.1025641025644" y="1377.0" />
+      <point x="335.4362866300371" y="1377.0" />
+      <point x="0.0" y="135.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.StatementLogger" target="org.apache.ibatis.logging.Log">
+      <point x="141.0" y="-83.5" />
+      <point x="3830.0144917582425" y="1387.0" />
+      <point x="3760.1871108058613" y="1387.0" />
+      <point x="3760.1871108058613" y="247.0" />
+      <point x="2345.3489778603753" y="247.0" />
+      <point x="118.28571428571422" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.log4j2.Log4j2Impl" target="org.apache.ibatis.logging.log4j2.Log4j2LoggerImpl">
+      <point x="-110.40000000000009" y="-135.5" />
+      <point x="225.036286630037" y="964.0" />
+      <point x="207.0" y="964.0" />
+      <point x="69.0" y="148.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.slf4j.Slf4jLoggerImpl" target="org.apache.ibatis.logging.Log">
+      <point x="0.0" y="-135.5" />
+      <point x="887.9731078970053" y="287.0" />
+      <point x="2148.2061207175184" y="287.0" />
+      <point x="-78.85714285714266" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.PreparedStatementLogger" target="org.apache.ibatis.logging.Log">
+      <point x="-186.75" y="-83.5" />
+      <point x="3003.0457417582425" y="1387.0" />
+      <point x="3121.833333333334" y="1387.0" />
+      <point x="3121.833333333334" y="287.0" />
+      <point x="2292.777549288947" y="287.0" />
+      <point x="65.71428571428578" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.ConnectionLogger" target="org.apache.ibatis.logging.jdbc.StatementLogger">
+      <point x="-78.80000000000018" y="-83.5" />
+      <point x="3647.8371108058614" y="1874.0" />
+      <point x="3689.0144917582425" y="1874.0" />
+      <point x="0.0" y="83.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.jdbc.ConnectionLogger" target="org.apache.ibatis.logging.Log">
+      <point x="157.5999999999999" y="-83.5" />
+      <point x="3884.2371108058614" y="1874.0" />
+      <point x="3909.5144917582425" y="1874.0" />
+      <point x="3909.5144917582425" y="237.0" />
+      <point x="2358.491835003233" y="237.0" />
+      <point x="131.42857142857156" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.log4j2.Log4j2AbstractLoggerImpl" target="org.apache.ibatis.logging.Log">
+      <point x="0.0" y="-161.5" />
+      <point x="496.0" y="277.0" />
+      <point x="2135.0632635746615" y="277.0" />
+      <point x="-92.0" y="108.5" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.LogFactory" target="org.apache.ibatis.logging.nologging.NoLoggingImpl">
+      <point x="185.0769230769231" y="-213.5" />
+      <point x="1899.4102564102568" y="1387.0" />
+      <point x="2947.343643611291" y="1387.0" />
+      <point x="0.0" y="122.0" />
+    </edge>
+    <edge source="org.apache.ibatis.logging.slf4j.Slf4jImpl" target="org.apache.ibatis.logging.Log">
+      <point x="-55.200000000000045" y="-135.5" />
+      <point x="1025.1068223443228" y="964.0" />
+      <point x="1036.4731078970053" y="964.0" />
+      <point x="1036.4731078970053" y="297.0" />
+      <point x="2161.3489778603753" y="297.0" />
+      <point x="-65.71428571428578" y="108.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.40000000000000013" x="2526.857142857143" y="876.2499999999995" />
+  <SelectedNodes>
+    <node>org.apache.ibatis.logging.Log</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
