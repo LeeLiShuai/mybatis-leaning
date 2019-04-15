@@ -1,17 +1,15 @@
 /**
- *    Copyright 2009-2019 the original author or authors.
+ * Copyright 2009-2019 the original author or authors.
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.apache.ibatis.datasource.unpooled;
 
@@ -26,33 +24,61 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
-
 import javax.sql.DataSource;
-
 import org.apache.ibatis.io.Resources;
 
 /**
+ * 不用连接池的数据源
+ *
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
 public class UnpooledDataSource implements DataSource {
 
+  /**
+   * 驱动类加载器
+   */
   private ClassLoader driverClassLoader;
+  /**
+   * 属性配置
+   */
   private Properties driverProperties;
+  /**
+   * 记录驱动列表，类初始化是已赋值
+   */
   private static Map<String, Driver> registeredDrivers = new ConcurrentHashMap<>();
-
+  /**
+   * 驱动名称
+   */
   private String driver;
+  /**
+   * 连接地址
+   */
   private String url;
+  /**
+   * 用户名
+   */
   private String username;
+  /**
+   * 密码
+   */
   private String password;
-
+  /**
+   * 是否自动提交
+   */
   private Boolean autoCommit;
+  /**
+   * 默认的事务隔离级别
+   */
   private Integer defaultTransactionIsolationLevel;
 
+  //类初始化时初始化驱动列表
   static {
+    //获取所有数据库驱动
     Enumeration<Driver> drivers = DriverManager.getDrivers();
     while (drivers.hasMoreElements()) {
       Driver driver = drivers.nextElement();
+      //注册驱动
       registeredDrivers.put(driver.getClass().getName(), driver);
     }
   }
@@ -73,7 +99,8 @@ public class UnpooledDataSource implements DataSource {
     this.driverProperties = driverProperties;
   }
 
-  public UnpooledDataSource(ClassLoader driverClassLoader, String driver, String url, String username, String password) {
+  public UnpooledDataSource(ClassLoader driverClassLoader, String driver, String url,
+      String username, String password) {
     this.driverClassLoader = driverClassLoader;
     this.driver = driver;
     this.url = url;
@@ -81,13 +108,17 @@ public class UnpooledDataSource implements DataSource {
     this.password = password;
   }
 
-  public UnpooledDataSource(ClassLoader driverClassLoader, String driver, String url, Properties driverProperties) {
+  public UnpooledDataSource(ClassLoader driverClassLoader, String driver, String url,
+      Properties driverProperties) {
     this.driverClassLoader = driverClassLoader;
     this.driver = driver;
     this.url = url;
     this.driverProperties = driverProperties;
   }
 
+  /**
+   * 获取连接
+   */
   @Override
   public Connection getConnection() throws SQLException {
     return doGetConnection(username, password);
@@ -182,6 +213,9 @@ public class UnpooledDataSource implements DataSource {
     this.defaultTransactionIsolationLevel = defaultTransactionIsolationLevel;
   }
 
+  /**
+   * 根据用户名密码获取连接
+   */
   private Connection doGetConnection(String username, String password) throws SQLException {
     Properties props = new Properties();
     if (driverProperties != null) {
@@ -196,25 +230,39 @@ public class UnpooledDataSource implements DataSource {
     return doGetConnection(props);
   }
 
+  /**
+   * 根据属性获取连接
+   */
   private Connection doGetConnection(Properties properties) throws SQLException {
+    //初始化驱动
     initializeDriver();
+    //根据URL和属性获取连接
     Connection connection = DriverManager.getConnection(url, properties);
+    //设置连接
     configureConnection(connection);
     return connection;
   }
 
+  /**
+   * 初始化驱动
+   */
   private synchronized void initializeDriver() throws SQLException {
+    //传入的驱动不在注册列表中
     if (!registeredDrivers.containsKey(driver)) {
       Class<?> driverType;
       try {
         if (driverClassLoader != null) {
+          //指定了类加载器，使用指定的类加载器加载驱动
           driverType = Class.forName(driver, true, driverClassLoader);
         } else {
+          //没有指定加载器，调用系统类加载器
           driverType = Resources.classForName(driver);
         }
         // DriverManager requires the driver to be loaded via the system ClassLoader.
         // http://www.kfu.com/~nsayer/Java/dyn-jdbc.html
-        Driver driverInstance = (Driver)driverType.newInstance();
+        //获取驱动实例
+        Driver driverInstance = (Driver) driverType.newInstance();
+        //加入注册驱动列表
         DriverManager.registerDriver(new DriverProxy(driverInstance));
         registeredDrivers.put(driver, driverInstance);
       } catch (Exception e) {
@@ -223,6 +271,9 @@ public class UnpooledDataSource implements DataSource {
     }
   }
 
+  /**
+   * 设置自动提交和事务隔离级别
+   */
   private void configureConnection(Connection conn) throws SQLException {
     if (autoCommit != null && autoCommit != conn.getAutoCommit()) {
       conn.setAutoCommit(autoCommit);
@@ -233,43 +284,45 @@ public class UnpooledDataSource implements DataSource {
   }
 
   private static class DriverProxy implements Driver {
+
     private Driver driver;
 
     DriverProxy(Driver d) {
-      this.driver = d;
+      driver = d;
     }
 
     @Override
     public boolean acceptsURL(String u) throws SQLException {
-      return this.driver.acceptsURL(u);
+      return driver.acceptsURL(u);
     }
 
     @Override
     public Connection connect(String u, Properties p) throws SQLException {
-      return this.driver.connect(u, p);
+      return driver.connect(u, p);
     }
 
     @Override
     public int getMajorVersion() {
-      return this.driver.getMajorVersion();
+      return driver.getMajorVersion();
     }
 
     @Override
     public int getMinorVersion() {
-      return this.driver.getMinorVersion();
+      return driver.getMinorVersion();
     }
 
     @Override
     public DriverPropertyInfo[] getPropertyInfo(String u, Properties p) throws SQLException {
-      return this.driver.getPropertyInfo(u, p);
+      return driver.getPropertyInfo(u, p);
     }
 
     @Override
     public boolean jdbcCompliant() {
-      return this.driver.jdbcCompliant();
+      return driver.jdbcCompliant();
     }
 
     // @Override only valid jdk7+
+    @Override
     public Logger getParentLogger() {
       return Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     }
@@ -286,6 +339,7 @@ public class UnpooledDataSource implements DataSource {
   }
 
   // @Override only valid jdk7+
+  @Override
   public Logger getParentLogger() {
     // requires JDK version 1.6
     return Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
