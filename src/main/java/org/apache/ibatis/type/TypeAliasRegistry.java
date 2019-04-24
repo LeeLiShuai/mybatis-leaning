@@ -1,17 +1,15 @@
 /**
- *    Copyright 2009-2019 the original author or authors.
+ * Copyright 2009-2019 the original author or authors.
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.apache.ibatis.type;
 
@@ -28,11 +26,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
 import org.apache.ibatis.io.ResolverUtil;
 import org.apache.ibatis.io.Resources;
 
 /**
+ * 用于保存别名和对应的类的关系
  * @author Clinton Begin
  */
 public class TypeAliasRegistry {
@@ -100,7 +98,6 @@ public class TypeAliasRegistry {
     registerAlias("ResultSet", ResultSet.class);
   }
 
-  @SuppressWarnings("unchecked")
   // throws class cast exception as well if types cannot be assigned
   public <T> Class<T> resolveAlias(String string) {
     try {
@@ -125,7 +122,7 @@ public class TypeAliasRegistry {
     registerAliases(packageName, Object.class);
   }
 
-  public void registerAliases(String packageName, Class<?> superType) {
+  private void registerAliases(String packageName, Class<?> superType) {
     ResolverUtil<Class<?>> resolverUtil = new ResolverUtil<>();
     resolverUtil.find(new ResolverUtil.IsA(superType), packageName);
     Set<Class<? extends Class<?>>> typeSet = resolverUtil.getClasses();
@@ -153,8 +150,11 @@ public class TypeAliasRegistry {
     }
     // issue #748
     String key = alias.toLowerCase(Locale.ENGLISH);
-    if (typeAliases.containsKey(key) && typeAliases.get(key) != null && !typeAliases.get(key).equals(value)) {
-      throw new TypeException("The alias '" + alias + "' is already mapped to the value '" + typeAliases.get(key).getName() + "'.");
+    if (typeAliases.containsKey(key) && typeAliases.get(key) != null && !typeAliases.get(key)
+        .equals(value)) {
+      throw new TypeException(
+          "The alias '" + alias + "' is already mapped to the value '" + typeAliases.get(key)
+              .getName() + "'.");
     }
     typeAliases.put(key, value);
   }
@@ -163,7 +163,8 @@ public class TypeAliasRegistry {
     try {
       registerAlias(alias, Resources.classForName(value));
     } catch (ClassNotFoundException e) {
-      throw new TypeException("Error registering type alias " + alias + " for " + value + ". Cause: " + e, e);
+      throw new TypeException(
+          "Error registering type alias " + alias + " for " + value + ". Cause: " + e, e);
     }
   }
 

@@ -43,7 +43,7 @@ public class GenericTokenParser {
   }
 
   /**
-   * 解析
+   * 解析，将所有被openToken和closeToken包围的字符，通过handler转化，重新组织text
    */
   public String parse(String text) {
     if (text == null || text.isEmpty()) {
@@ -51,20 +51,24 @@ public class GenericTokenParser {
     }
     //查找开始标记
     int start = text.indexOf(openToken);
+    //没有开始标记
     if (start == -1) {
       return text;
     }
+    //转化为字符数组
     char[] src = text.toCharArray();
     int offset = 0;
     StringBuilder builder = new StringBuilder();
     StringBuilder expression = null;
     while (start > -1) {
+      //如果text中在openToken前存在转义符就将转义符去掉。如果openToken前存在转义符，start的值必然大于0，最小也为1
+      //因为此时openToken是不需要进行处理的，所以也不需要处理endToken。接着查找下一个openToken
       if (start > 0 && src[start - 1] == '\\') {
         //开始标记已转义。删除反斜杠并继续。
         builder.append(src, offset, start - offset - 1).append(openToken);
         offset = start + openToken.length();
       } else {
-        // found open token. let's search close token.
+        //找到openToken，继续查找closeToken
         if (expression == null) {
           expression = new StringBuilder();
         } else {
@@ -72,6 +76,7 @@ public class GenericTokenParser {
         }
         builder.append(src, offset, start - offset);
         offset = start + openToken.length();
+        //对应的closeToken的下标
         int end = text.indexOf(closeToken, offset);
         while (end > -1) {
           if (end > offset && src[end - 1] == '\\') {
@@ -86,7 +91,7 @@ public class GenericTokenParser {
           }
         }
         if (end == -1) {
-          // close token was not found.
+          // 没有结束标志，剩余所有字符添加到builder
           builder.append(src, start, src.length - start);
           offset = src.length;
         } else {

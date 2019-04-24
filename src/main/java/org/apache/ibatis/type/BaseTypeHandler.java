@@ -21,7 +21,7 @@ import org.apache.ibatis.executor.result.ResultMapException;
 import org.apache.ibatis.session.Configuration;
 
 /**
- * TypeHandler的基本实现，不会被调用，供用户自定义转化时继承。
+ * TypeHandler的基本实现，不会被调用，供用户自定义转化时继承。 此类只处理空值判断，其余逻辑由子类处理
  *
  * @author Clinton Begin
  * @author Simone Tripodi
@@ -50,7 +50,7 @@ public abstract class BaseTypeHandler<T> extends TypeReference<T> implements Typ
   }
 
   /**
-   * jdbc类型转化为Java类型
+   * jdbc类型转化为Java类型,此类只处理空值判断，其余逻辑由子类处理
    */
   @Override
   public void setParameter(PreparedStatement ps, int i, T parameter, JdbcType jdbcType)
