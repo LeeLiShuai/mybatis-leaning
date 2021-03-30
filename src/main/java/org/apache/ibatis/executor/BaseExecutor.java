@@ -45,21 +45,45 @@ import org.apache.ibatis.transaction.Transaction;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 
 /**
+ * 执行器的基本实现
  * @author Clinton Begin
  */
 public abstract class BaseExecutor implements Executor {
 
   private static final Log log = LogFactory.getLog(BaseExecutor.class);
 
+  /**
+   * 事务对象
+   */
   protected Transaction transaction;
+  /**
+   * 执行器包装对象
+   */
   protected Executor wrapper;
 
+  /**
+   * 延迟加载队列
+   */
   protected ConcurrentLinkedQueue<DeferredLoad> deferredLoads;
+  /**
+   * 本地缓存，即一级缓存
+   */
   protected PerpetualCache localCache;
+  /**
+   * 本地输出类型的参数的缓存
+   */
   protected PerpetualCache localOutputParameterCache;
+  /**
+   * 配置信息
+   */
   protected Configuration configuration;
-
+  /**
+   * 嵌套查询的层级
+   */
   protected int queryStack;
+  /**
+   * 是否关闭
+   */
   private boolean closed;
 
   protected BaseExecutor(Configuration configuration, Transaction transaction) {
@@ -143,16 +167,19 @@ public abstract class BaseExecutor implements Executor {
     if (closed) {
       throw new ExecutorException("Executor was closed.");
     }
+    //如果查询设置了清除缓存，并且嵌套层级为0，则清空缓存
     if (queryStack == 0 && ms.isFlushCacheRequired()) {
       clearLocalCache();
     }
     List<E> list;
     try {
       queryStack++;
+      //从一级缓存中取
       list = resultHandler == null ? (List<E>) localCache.getObject(key) : null;
       if (list != null) {
         handleLocallyCachedOutputParameters(ms, key, parameter, boundSql);
       } else {
+        //缓存中不存在，从数据库中查询
         list = queryFromDatabase(ms, parameter, rowBounds, resultHandler, key, boundSql);
       }
     } finally {
@@ -196,12 +223,16 @@ public abstract class BaseExecutor implements Executor {
     if (closed) {
       throw new ExecutorException("Executor was closed.");
     }
+    //创建key
     CacheKey cacheKey = new CacheKey();
+    //设置 id、offset、limit、sql 到CacheKey中
     cacheKey.update(ms.getId());
     cacheKey.update(rowBounds.getOffset());
     cacheKey.update(rowBounds.getLimit());
     cacheKey.update(boundSql.getSql());
+    //设置ParameterMapping数组的元素对应的value到CacheKey中
     List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
+    //参数对应的处理方法
     TypeHandlerRegistry typeHandlerRegistry = ms.getConfiguration().getTypeHandlerRegistry();
     // mimic DefaultParameterHandler logic
     for (ParameterMapping parameterMapping : parameterMappings) {
@@ -259,9 +290,11 @@ public abstract class BaseExecutor implements Executor {
     }
   }
 
+
   @Override
   public void clearLocalCache() {
     if (!closed) {
+      //直接将两个缓存清空，缓存即一个map
       localCache.clear();
       localOutputParameterCache.clear();
     }

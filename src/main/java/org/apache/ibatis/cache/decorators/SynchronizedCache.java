@@ -20,10 +20,14 @@ import java.util.concurrent.locks.ReadWriteLock;
 import org.apache.ibatis.cache.Cache;
 
 /**
+ * 同步缓存，方法用synchronized修饰
  * @author Clinton Begin
  */
 public class SynchronizedCache implements Cache {
 
+  /**
+   * 装饰的缓存
+   */
   private final Cache delegate;
 
   public SynchronizedCache(Cache delegate) {

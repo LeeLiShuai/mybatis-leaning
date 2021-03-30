@@ -23,22 +23,41 @@ import java.util.StringJoiner;
 import org.apache.ibatis.reflection.ArrayUtil;
 
 /**
+ * 缓存的key
  * @author Clinton Begin
  */
 public class CacheKey implements Cloneable, Serializable {
 
   private static final long serialVersionUID = 1146682552656046210L;
 
+  /**
+   * 空缓存
+   */
   public static final CacheKey NULL_CACHE_KEY = new NullCacheKey();
 
   private static final int DEFAULT_MULTIPLYER = 37;
   private static final int DEFAULT_HASHCODE = 17;
 
+  /**
+   * hashCode的求值系数
+   */
   private final int multiplier;
+  /**
+   * 缓存key的hashCode
+   */
   private int hashcode;
+  /**
+   * 校验和
+   */
   private long checksum;
+  /**
+   * 调度用update的次数
+   */
   private int count;
   // 8/21/2017 - Sonarlint flags this as needing to be marked transient.  While true if content is not serializable, this is not always true and thus should not be marked transient.
+  /**
+   * hashcode方法对象的集合
+   */
   private List<Object> updateList;
 
   public CacheKey() {
@@ -77,25 +96,29 @@ public class CacheKey implements Cloneable, Serializable {
 
   @Override
   public boolean equals(Object object) {
+    //内存地址一样，直接返回true
     if (this == object) {
       return true;
     }
+    //类型不一样，返回false
     if (!(object instanceof CacheKey)) {
       return false;
     }
 
     final CacheKey cacheKey = (CacheKey) object;
-
+    //判断hashcode
     if (hashcode != cacheKey.hashcode) {
       return false;
     }
+    //判断校验和
     if (checksum != cacheKey.checksum) {
       return false;
     }
+    //判断update次数
     if (count != cacheKey.count) {
       return false;
     }
-
+    //判断每一项hashcode
     for (int i = 0; i < updateList.size(); i++) {
       Object thisObject = updateList.get(i);
       Object thatObject = cacheKey.updateList.get(i);

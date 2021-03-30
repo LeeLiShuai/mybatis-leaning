@@ -22,14 +22,24 @@ import java.util.concurrent.locks.ReadWriteLock;
 import org.apache.ibatis.cache.Cache;
 
 /**
+ * fifo方式淘汰的缓存
  * FIFO (first in, first out) cache decorator.
  *
  * @author Clinton Begin
  */
 public class FifoCache implements Cache {
 
+  /**
+   * 修饰的缓存
+   */
   private final Cache delegate;
+  /**
+   * 保存key的双端队列
+   */
   private final Deque<Object> keyList;
+  /**
+   * 队列的上限，缓存对象大于size时，要fifo淘汰
+   */
   private int size;
 
   public FifoCache(Cache delegate) {

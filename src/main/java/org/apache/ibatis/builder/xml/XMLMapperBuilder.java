@@ -46,14 +46,27 @@ import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 
 /**
+ * 解析Mpper文件
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
 public class XMLMapperBuilder extends BaseBuilder {
 
+  /**
+   * 解析器
+   */
   private final XPathParser parser;
+  /**
+   * mapper构造器助手
+   */
   private final MapperBuilderAssistant builderAssistant;
+  /**
+   * 客赔其他语句引用的可重用语句块的集合，如<sql></sql>
+   */
   private final Map<String, XNode> sqlFragments;
+  /**
+   * 资源引用地址
+   */
   private final String resource;
 
   @Deprecated

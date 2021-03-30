@@ -20,12 +20,22 @@ import java.util.concurrent.locks.ReadWriteLock;
 import org.apache.ibatis.cache.Cache;
 
 /**
+ * 定时清空的缓存，每次涉及到数据的操作时，判断是否需要清空缓存
  * @author Clinton Begin
  */
 public class ScheduledCache implements Cache {
 
+  /**
+   * 修饰的缓存
+   */
   private final Cache delegate;
+  /**
+   * 清空的间隔，毫秒
+   */
   protected long clearInterval;
+  /**
+   * 上次清空时间
+   */
   protected long lastClear;
 
   public ScheduledCache(Cache delegate) {

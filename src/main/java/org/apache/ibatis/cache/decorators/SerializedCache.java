@@ -30,10 +30,14 @@ import org.apache.ibatis.cache.CacheException;
 import org.apache.ibatis.io.Resources;
 
 /**
+ * 可序列化的缓存，put时将内容序列化
  * @author Clinton Begin
  */
 public class SerializedCache implements Cache {
 
+  /**
+   * 装饰的缓存
+   */
   private final Cache delegate;
 
   public SerializedCache(Cache delegate) {

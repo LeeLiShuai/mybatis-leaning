@@ -92,6 +92,7 @@ import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.UnknownTypeHandler;
 
 /**
+ * 解析mapper接口方法上的注解
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */

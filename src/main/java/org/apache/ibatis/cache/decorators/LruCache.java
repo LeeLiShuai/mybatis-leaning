@@ -22,6 +22,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import org.apache.ibatis.cache.Cache;
 
 /**
+ * lru淘汰的缓存
  * Lru (least recently used) cache decorator.
  *
  * @author Clinton Begin
@@ -29,7 +30,13 @@ import org.apache.ibatis.cache.Cache;
 public class LruCache implements Cache {
 
   private final Cache delegate;
+  /**
+   * LinkedHashMap保存key,重写removeEldestEntry方法实现lru
+   */
   private Map<Object, Object> keyMap;
+  /**
+   * 最老的key
+   */
   private Object eldestKey;
 
   public LruCache(Cache delegate) {
