@@ -33,12 +33,19 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.transaction.Transaction;
 
 /**
+ * 带有缓存的Executor,二级缓存使用
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
 public class CachingExecutor implements Executor {
 
+  /**
+   * 装饰的执行器
+   */
   private final Executor delegate;
+  /**
+   * 支持事务的缓存管理器
+   */
   private final TransactionalCacheManager tcm = new TransactionalCacheManager();
 
   public CachingExecutor(Executor delegate) {
@@ -72,6 +79,7 @@ public class CachingExecutor implements Executor {
 
   @Override
   public int update(MappedStatement ms, Object parameterObject) throws SQLException {
+    //更新时，namespace中所有缓存都清空
     flushCacheIfRequired(ms);
     return delegate.update(ms, parameterObject);
   }
@@ -97,9 +105,10 @@ public class CachingExecutor implements Executor {
       flushCacheIfRequired(ms);
       if (ms.isUseCache() && resultHandler == null) {
         ensureNoOutParams(ms, boundSql);
-        @SuppressWarnings("unchecked")
+        //缓存中取数据
         List<E> list = (List<E>) tcm.getObject(cache, key);
         if (list == null) {
+          //没有缓存，查数据库
           list = delegate.query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);
           tcm.putObject(cache, key, list); // issue #578 and #116
         }

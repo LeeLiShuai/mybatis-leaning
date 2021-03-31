@@ -34,6 +34,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 
 /**
+ * StatementHandler基类
  * @author Clinton Begin
  */
 public abstract class BaseStatementHandler implements StatementHandler {
@@ -60,6 +61,7 @@ public abstract class BaseStatementHandler implements StatementHandler {
     this.objectFactory = configuration.getObjectFactory();
 
     if (boundSql == null) { // issue #435, get the key before calculating the statement
+      //获取自增主键
       generateKeys(parameterObject);
       boundSql = mappedStatement.getBoundSql(parameterObject);
     }
@@ -85,7 +87,9 @@ public abstract class BaseStatementHandler implements StatementHandler {
     ErrorContext.instance().sql(boundSql.getSql());
     Statement statement = null;
     try {
+      //创建statement
       statement = instantiateStatement(connection);
+      //超时时间
       setStatementTimeout(statement, transactionTimeout);
       setFetchSize(statement);
       return statement;

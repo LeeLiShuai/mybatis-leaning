@@ -41,9 +41,21 @@ public class TransactionalCache implements Cache {
 
   private static final Log log = LogFactory.getLog(TransactionalCache.class);
 
+  /**
+   * 装饰的缓存，即二级缓存
+   */
   private final Cache delegate;
+  /**
+   * 提交时清空，标识是否是清空状态
+   */
   private boolean clearOnCommit;
+  /**
+   * 待提交数据
+   */
   private final Map<Object, Object> entriesToAddOnCommit;
+  /**
+   * 查找不到的key
+   */
   private final Set<Object> entriesMissedInCache;
 
   public TransactionalCache(Cache delegate) {

@@ -30,8 +30,17 @@ import org.apache.ibatis.reflection.ExceptionUtil;
  */
 public class Plugin implements InvocationHandler {
 
+  /**
+   * 目标对象
+   */
   private final Object target;
+  /**
+   * 拦截器
+   */
   private final Interceptor interceptor;
+  /**
+   * 拦截的方法映射
+   */
   private final Map<Class<?>, Set<Method>> signatureMap;
 
   private Plugin(Object target, Interceptor interceptor, Map<Class<?>, Set<Method>> signatureMap) {
@@ -41,25 +50,33 @@ public class Plugin implements InvocationHandler {
   }
 
   public static Object wrap(Object target, Interceptor interceptor) {
+    //获取拦截的方法映射
     Map<Class<?>, Set<Method>> signatureMap = getSignatureMap(interceptor);
+    //获取目标类的类型
     Class<?> type = target.getClass();
+    //获取目标类的接口集合
     Class<?>[] interfaces = getAllInterfaces(type, signatureMap);
+    //如果有接口，创建爱你jdk的代理对象
     if (interfaces.length > 0) {
       return Proxy.newProxyInstance(
           type.getClassLoader(),
           interfaces,
           new Plugin(target, interceptor, signatureMap));
     }
+    //没有返回原始对象
     return target;
   }
 
   @Override
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
     try {
+      //是否被拦截
       Set<Method> methods = signatureMap.get(method.getDeclaringClass());
       if (methods != null && methods.contains(method)) {
+        //拦截处理
         return interceptor.intercept(new Invocation(target, method, args));
       }
+      //调用原方法
       return method.invoke(target, args);
     } catch (Exception e) {
       throw ExceptionUtil.unwrapThrowable(e);
