@@ -56,7 +56,7 @@ public class Plugin implements InvocationHandler {
     Class<?> type = target.getClass();
     //获取目标类的接口集合
     Class<?>[] interfaces = getAllInterfaces(type, signatureMap);
-    //如果有接口，创建爱你jdk的代理对象
+    //如果有接口，创建jdk的代理对象
     if (interfaces.length > 0) {
       return Proxy.newProxyInstance(
           type.getClassLoader(),

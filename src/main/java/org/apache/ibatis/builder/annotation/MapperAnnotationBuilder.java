@@ -297,6 +297,10 @@ public class MapperAnnotationBuilder {
     return null;
   }
 
+  /**
+   * 处理每一个方法
+   * @param method
+   */
   void parseStatement(Method method) {
     Class<?> parameterTypeClass = getParameterType(method);
     LanguageDriver languageDriver = getLanguageDriver(method);
